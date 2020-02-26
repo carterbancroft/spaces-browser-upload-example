@@ -1,4 +1,4 @@
-# How to upload a file to a Digital Ocean Space directly from the browser
+# Upload files to a Digital Ocean Space directly from the browser
 Most examples I see to do something like this are for S3. Although the APIs are
 the same it can still be a confusing difference. This is a basic example that
 includes both a client and a server.
