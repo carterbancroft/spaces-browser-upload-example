@@ -5,6 +5,7 @@ const API_URL = 'http://localhost:4000'
 const App = () => {
   const [file, setFile] = useState(null)
   const [uploadSuccessful, setUploadSuccessful] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleInputChange = event => {
     // Add the file to state
@@ -15,6 +16,25 @@ const App = () => {
     // Don't do a real form submit
     event.preventDefault()
 
+    setIsSubmitting(true)
+
+    const signedUrl = await getSignedUrl()
+
+    try {
+      await uploadFile(signedUrl)
+    }
+    catch (err) {
+      setIsSubmitting(false)
+      console.log(err)
+      alert('There was an error uploading your file.')
+      throw err
+    }
+
+    setIsSubmitting(false)
+    alert('Upload success. Check out your Space.')
+  }
+
+  const getSignedUrl = async () => {
     const body = {
       fileName: file.name,
       fileType: file.type,
@@ -27,24 +47,20 @@ const App = () => {
     })
     const {signedUrl} = await response.json()
 
-    try {
-      await fetch(signedUrl, {
-        method: 'PUT',
-        body: file,
-        headers: {
-          'Content-Type': file.type,
-          'x-amz-acl': 'public-read',
-        }
-      })
-    }
-    catch (err) {
-      setUploadSuccessful(false)
-      console.log(err)
-      alert('There was an error uploading your file')
-      throw err
-    }
+    return signedUrl
+  }
 
-    setUploadSuccessful(true)
+  const uploadFile = async signedUrl => {
+    const res = await fetch(signedUrl, {
+      method: 'PUT',
+      body: file,
+      headers: {
+        'Content-Type': file.type,
+        'x-amz-acl': 'public-read',
+      }
+    })
+
+    return res
   }
 
   return (
@@ -53,14 +69,7 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         <input type="file" name="file" onChange={handleInputChange} />
         <br />
-        <input type="submit" value="Upload" />
-        <p>
-        {
-          uploadSuccessful ? 
-            'Your file has been uploaded, go look in your space.' :
-            ''
-        }
-        </p>
+        <input type="submit" value="Upload" disabled={isSubmitting} />
       </form>
     </>
   )
