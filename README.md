@@ -12,8 +12,8 @@ Install dependencies in both `server/` and `client/` using npm:
 $ npm install
 ```
 
-In the server repo you'll need to update `config.js` to include your own
-Digital Ocean Spaces details. You can generate tokens at [https://cloud.digitalocean.com/account/api/tokens](https://cloud.digitalocean.com/account/api/tokens)
+In the server repo you'll need to update [`config.js`](https://github.com/carterbancroft/spaces-browser-upload-example/blob/master/server/config.js)
+to include your own Digital Ocean Spaces details. You can generate tokens at [https://cloud.digitalocean.com/account/api/tokens](https://cloud.digitalocean.com/account/api/tokens)
 
 ## Digital Ocean Setup
 You'll need a DO account and a Space (which costs $5 a month).
