@@ -36,10 +36,12 @@ From the server directory run:
 $ npm start
 ```
 
-The server runs by default on port 4000.
+The server runs by default on port [http://localhost:4000](http://localhost:4000)
 
 ## Running The Client
 Same thing. From the client directory run:
 ```
 $ npm start
 ```
+
+The client runs by default at [http://localhost:3000](http://localhost:3000)
