@@ -6,6 +6,9 @@ includes both a client and a server.
 The server uses Node.js and Express and the client is built with React
 (specifically using create-react-app).
 
+I've also written a [companion article](https://carterbancroft.com/uploading-directly-to-digital-ocean-spaces-from-your-dang-browser/)
+for this repo.
+
 ## Project Setup
 Install dependencies in both `server/` and `client/` using npm:
 ```
